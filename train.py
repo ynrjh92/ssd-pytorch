@@ -85,7 +85,7 @@ if __name__ == '__main__':
         os.makedirs(os.getcwd()+'/results/images/')
     if not os.path.exists(os.getcwd()+'/results/loss/'):
         os.makedirs(os.getcwd()+'/results/loss/')
-
+        print('./results/loss/ folder is created. ')
     # Get arguments for train
     args = get_train_argument()
     print('Arguments of train : ', args)

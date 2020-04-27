@@ -6,18 +6,18 @@ from src.model import SSD
 from src.data.datasets import VOCxx
 
 """
-Precision :                                 TP
+Precision :                           TP
                         ----------------------------
-                                    TP + FP (all detections)
+                           TP + FP (all detections)
 
-Recall :                                      TP
+Recall :                              TP
                         ----------------------------
-                                       all number of GTs
+                              all number of GTs
 """
 
 def collect_results(detections, targets):    
     # detections_all : [N, 7] - [coordinates(4), score, class_label, image_label]
-    # targets_all       : [N, 8] -  [coordinates(4), class_label, difficulty, image_label, detector or not]
+    # targets_all    : [N, 8] - [coordinates(4), class_label, difficulty, image_label, detected or not]
     detections_all = torch.zeros(1,7).cuda()
     targets_all = torch.zeros(1, 8).cuda()
     for i in range(len(detections)):
@@ -125,7 +125,7 @@ def evaluate(test_loader, model, args):
             targets = [t.cuda() for t in targets]
 
             # Forward propagation
-            det_results  = model(images)
+            det_results = model(images)
 
             # Collect all detection results and targets
             detections_boxes.extend(det_results)
@@ -141,7 +141,7 @@ def evaluate(test_loader, model, args):
 if __name__ == '__main__':
     # Get eval arguments
     args = get_eval_argument()
-    print('arguments for evaluation : ', args)
+    print('Arguments for evaluation : ', args)
 
     # Set cuda device
     set_cuda_dev(args.ngpu)
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     model.eval()
 
     # Load test datas
-    test_dataset = VOCxx('test', args.dataroot, args.datayears, args.datanames, discard_difficult=args.discard_difficult)
+    test_dataset = VOCxx('test', args.dataroot, args.datayears, args.datanames, discard_difficult=args.discard_difficult, use_augment=False)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=args.batch_size, shuffle=False, collate_fn=test_dataset.collate_fn, num_workers=1, pin_memory=True)
 
     evaluate(test_loader, model, args)

@@ -1,4 +1,4 @@
-from argparser import get_eval_argument, set_cuda_dev
+from argparser import get_infer_argument, set_cuda_dev
 from torchvision import transforms
 from PIL import Image, ImageDraw, ImageFont
 
@@ -59,8 +59,9 @@ def detect_image(original_image, args):
     del draw
 
 if __name__ == '__main__':
-    args = get_eval_argument()
+    args = get_infer_argument()
     set_cuda_dev(args.ngpu)
+    print('Arguments for inference : ', args)
 
     # Load model checkpoint
     model = SSD('test', args)

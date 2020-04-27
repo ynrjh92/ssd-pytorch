@@ -37,10 +37,16 @@ def find_overlapped_elemenets(datadir, dataset_file):
     anno_total = sorted(os.listdir(datadir+ '/Annotations/'))
     return list(sorted(set(img_ext) & set(img_total))), list(sorted(set(anno_ext) & set(anno_total)))
 
-def parse_data(datadirs, datanames, images=[], annotations=[]):
-    if ',' in datadirs[0]:
-        datadirs = datadirs[0].split(',')
-    
+def parse_data(datadirs, datayears, datanames, images=[], annotations=[]):
+    # Use both dataset (VOC 07 and 12)
+    if '+' in datayears:
+        # When configuring dataroot using argument
+        if ',' in datadirs[0]:
+            datadirs = datadirs[0].split(',')
+    # Since only one dataset is used, only one dataroot argument should have it
+    else:
+        assert len(datadirs) == 1
+
     for datadir in datadirs:
         dataset_file = datadir + '/ImageSets/Main/' + datanames    
         # Get only overlapped elemenets.

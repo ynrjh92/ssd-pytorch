@@ -16,7 +16,7 @@ class VOCxx(Dataset):
 
         # Get datas
         self.dataroot, self.datayears, self.datanames = dataroot, datayears, datanames        
-        self.image_lists, self.target_lists = parse_data(self.dataroot, self.datanames)
+        self.image_lists, self.target_lists = parse_data(self.dataroot, self.datayears, self.datanames)
         assert len(self.image_lists) == len(self.target_lists)
 
     def __getitem__(self, i):

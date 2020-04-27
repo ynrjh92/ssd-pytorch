@@ -48,10 +48,9 @@ def get_eval_argument():
     parser.add_argument('--ngpu', default=0, type=int, help='(int) Select which GPU to use')
     # Data parameters
     parser.add_argument('--discard-difficult', default=False, type=str2bool, help='(bool) Decide whether to use the difficulty example or not')
-    parser.add_argument('--dataroot', default=['/media/dataset/VOC2007'], type=list, help='(list) Set the root path of the VOC dataset')
+    parser.add_argument('--dataroot', default=['/media/dataset/VOC2007'], nargs='*', help='(list) Set the root path of the VOC dataset')
     parser.add_argument('--datayears', default='07+12', type=str, help='(str) Determine the year of the VOC dataset (07 / 12 / 07+12)')
     parser.add_argument('--datanames', default='test.txt', type=str, help='(str) Determine the datanames of the VOC dataset (e.g. test.txt)')    
-    parser.add_argument('--use-augment', default=False, type=str2bool, help='(bool) Decide whether to use data augmentation or not')
     parser.add_argument('--batch-size', default=1, type=int, help='(int) Batch size')
 
     # Model parameters
@@ -63,6 +62,30 @@ def get_eval_argument():
     parser.add_argument('--nms-overlap', default=0.45, type=float, help='(float) Threshold used in nms algorithm')
     parser.add_argument('--mAP-threshold', default=0.5, type=float, help='(float) Overlap criteria to judge TP and FP')
 
+    # Result parameters
+    parser.add_argument('--trained-model-path', default=os.getcwd()+'/results/weights/', type=str, help='(str) Path where the trained model is saved')
+    
+    args = parser.parse_args()
+    return args
+
+def get_infer_argument():
+    parser = argparse.ArgumentParser(description='PyTorch-based SSD implementation')
+    parser.add_argument('--ngpu', default=0, type=int, help='(int) Select which GPU to use')
+    # Data parameters
+    parser.add_argument('--discard-difficult', default=False, type=str2bool, help='(bool) Decide whether to use the difficulty example or not')
+    parser.add_argument('--dataroot', default=['/media/dataset/VOC2007'], nargs='*', help='(list) Set the root path of the VOC dataset')
+    parser.add_argument('--datayears', default='07+12', type=str, help='(str) Determine the year of the VOC dataset (07 / 12 / 07+12)')
+    parser.add_argument('--datanames', default='test.txt', type=str, help='(str) Determine the datanames of the VOC dataset (e.g. test.txt)')    
+    parser.add_argument('--batch-size', default=1, type=int, help='(int) Batch size')
+
+    # Model parameters
+    parser.add_argument('--nclasses', default=21, type=int, help='(int) The number of classes')
+    parser.add_argument('--pretrained-model', default=os.getcwd()+'/results/weights/pretrained/vgg16_converted.pth', type=str, help='(str) Where is the pre-trained vgg16 weight model')
+    parser.add_argument('--trained-model', default=None, type=str, help='(bool) Where the trained model is')
+    parser.add_argument('--min-score', default=0.2, type=float, help='(float) Threshold score to judge whether object is detected')
+    parser.add_argument('--top-k', default=200, type=int, help='(int) To get only the top_k scores with high scores among multiple detections')
+    parser.add_argument('--nms-overlap', default=0.45, type=float, help='(float) Threshold used in nms algorithm')
+    
     # Result parameters
     parser.add_argument('--test-image', default='/media/dataset/VOC2007/JPEGImages/000001.jpg', type=str, help='(str) Test image path and name to confirm detection results')
     parser.add_argument('--image-save-path', default=os.getcwd()+'/results/images/', type=str, help='(str) Path to save the resulting image')
