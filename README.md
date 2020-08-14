@@ -7,7 +7,7 @@ See [Comparison of both repositories](#Comparisons) for differences between the 
 # Getting started
 
 #### Sample results
-<img src=./results/images/p_000001.jpg width="280" height="280">  <img src=./results/images/p_000002.jpg width="280" height="280">  <img src=./results/images/p_000004.jpg width="280" height="280">
+<img src=./results/images/p_000001.jpg width="250" height="250">  <img src=./results/images/p_000002.jpg width="250" height="250">  <img src=./results/images/p_000004.jpg width="250" height="250">
 
 ## Table of contents  
 - [Installation](#Installation)  
@@ -74,9 +74,9 @@ By using this, you can easily use and tune the parameters.
 
 ## Performance  
 
-|VOC 2007 test | Achieved | Reported paper |  
-| :--------: | :------: | :--------: |  
-| mAP (%)  | 76.4 | 77.2 |  
+|VOC 2007 test | Achieved | Reported paper |  Trained model |  
+| :--------: | :------: | :--------: | :--------: |  
+| mAP (%)  | 76.5 | 77.2 | [download](https://drive.google.com/file/d/1wZVIJ5KaJlz9CTyrkXRwIek_VWNYBz6W/view?usp=sharing) |  
 
 
 ## Comparisons  

@@ -20,7 +20,7 @@ def get_train_argument():
     parser.add_argument('--datayears', default='07+12', type=str, help='(str) Determine the year of the VOC dataset (07 / 12 / 07+12)')
     parser.add_argument('--datanames', default='trainval.txt', type=str, help='(str) Determine the datanames of the VOC dataset (e.g. trainval.txt)')    
     parser.add_argument('--use-augment', default=True, type=str2bool, help='(bool) Decide whether to use data augmentation or not')
-    parser.add_argument('--batch-size', default=8, type=int, help='(int) Batch size')
+    parser.add_argument('--batch-size', default=32, type=int, help='(int) Batch size')
 
     # Model parameters
     parser.add_argument('--nclasses', default=21, type=int, help='(int) The number of classes')
